@@ -1,0 +1,126 @@
+
+
+/* responsive */
+.dashboard-overview {
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.dashboard-overview h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+/* Stats Section */
+.stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.stat-card {
+    flex: 1 1 calc(50% - 20px);
+    /* Two columns on medium screens */
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 300px;
+    /* Limit width on larger screens */
+}
+
+.stat-card h3 {
+    font-size: 1.5rem;
+    color: #007bff;
+}
+
+.stat-card p {
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Chart Section */
+.chart-container {
+    margin: 30px auto;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    /* Centered and limited width */
+}
+
+.chart-container h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+/* Insights Section */
+.insights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.insight-card {
+    flex: 1 1 calc(33% - 20px);
+    /* Three columns on medium screens */
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 300px;
+}
+
+.insight-card h4 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.insight-card p {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+
+    .stat-card,
+    .insight-card {
+        flex: 1 1 100%;
+        /* Full width on small screens */
+    }
+
+    .chart-container {
+        padding: 10px;
+    }
+
+    .chart-container h3 {
+        font-size: 1.2rem;
+    }
+
+    .stats,
+    .insights {
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-overview h2 {
+        font-size: 1.5rem;
+    }
+
+    .stat-card h3,
+    .insight-card h4 {
+        font-size: 1.2rem;
+    }
+}

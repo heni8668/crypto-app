@@ -32,7 +32,7 @@ function Login() {
 
       // Send login data to the backend API
       const response = await axios.post(
-        "https://crypto2-j13c.onrender.com/api/auth/login",
+        "https://crypto-ault.onrender.com/api/auth/login",
         formData,
         {
           headers: { "Content-Type": "application/json" }, // Ensure proper content type
@@ -50,7 +50,7 @@ function Login() {
         localStorage.setItem("email", response.data.user.email);
 
         // Redirect to user dashboard or home page after successful login
-        navigate("/admin");
+        navigate("/");
       } else {
         setError("Unexpected response format. Please try again later.");
         console.error("Unexpected Response Format:", response.data);

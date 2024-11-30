@@ -28,7 +28,7 @@ function Signup() {
     setIsLoading(true); // Start loading
     try {
       const response = await axios.post(
-        "https://crypto2-j13c.onrender.com/api/auth/register",
+        "https://crypto-ault.onrender.com/api/auth/register",
         formData
       );
       console.log("Signup Successful:", response.data);

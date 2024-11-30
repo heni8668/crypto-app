@@ -23,7 +23,7 @@ function UserManagement() {
   const fetchUsers = async () => {
     try {
       const response = await fetch(
-        "https://crypto2-j13c.onrender.com/api/auth/"
+        "https://crypto-ault.onrender.com/api/auth/"
       );
       const data = await response.json();
       setUsers(data);
@@ -36,7 +36,7 @@ function UserManagement() {
   const handleUpdateUser = async (userId) => {
     try {
       const response = await fetch(
-        `https://crypto2-j13c.onrender.com/api/auth/${userId}`,
+        `https://crypto-ault.onrender.com/api/auth/${userId}`,
         {
           method: "PUT",
           headers: {
@@ -60,7 +60,7 @@ function UserManagement() {
   const handleDeleteUser = async (userId) => {
     try {
       const response = await fetch(
-        `https://crypto2-j13c.onrender.com/api/auth/${userId}`,
+        `https://crypto-ault.onrender.com/api/auth/${userId}`,
         {
           method: "DELETE",
         }

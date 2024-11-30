@@ -19,7 +19,7 @@ function Hero() {
   const [userMessage, setUserMessage] = useState("");
 
   const marketUrl = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=4&page=1&sparkline=false`;
-  const apiBaseUrl = "https://crypto-ault.onrender.com/api/auth";
+  const apiBaseUrl = "https://crypto2-j13c.onrender.com/api/auth";
 
   function numberWithCommas(x) {
     if (x === null || x === undefined) {

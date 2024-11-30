@@ -137,7 +137,7 @@ function UserManagement() {
                   </button>
                   <button
                     className="delete-btn"
-                    onClick={() => handleDeleteUser(item.id)}
+                    onClick={() => handleDeleteUser(item._id)}
                   >
                     Delete
                   </button>

@@ -11,42 +11,42 @@ function AdminOverview() {
       <div className="main-cards">
         <div className="card">
           <div className="card-inner">
-            <p className="text-primary">PRODUCTS</p>
+            <p className="text-primary">Deposit</p>
             <span className="material-icons-outlined text-blue">
               <IconShoppingBag />
             </span>
           </div>
-          <span className="text-primary font-weight-bold">249</span>
+          <span className="text-primary font-weight-bold">$ {' '}249</span>
         </div>
 
         <div className="card">
           <div className="card-inner">
-            <p className="text-primary">PURCHASE ORDERS</p>
+            <p className="text-primary">Receive</p>
             <span className="material-icons-outlined text-orange">
               <IconShoppingBag />
             </span>
           </div>
-          <span className="text-primary font-weight-bold">83</span>
+          <span className="text-primary font-weight-bold"> $ {' '}83</span>
         </div>
 
         <div className="card">
           <div className="card-inner">
-            <p className="text-primary">SALES ORDERS</p>
+            <p className="text-primary">Transfer</p>
             <span className="material-icons-outlined text-green">
               <IconShoppingBag />
             </span>
           </div>
-          <span className="text-primary font-weight-bold">79</span>
+          <span className="text-primary font-weight-bold">$ {' '}79</span>
         </div>
 
         <div className="card">
           <div className="card-inner">
-            <p className="text-primary">INVENTORY ALERTS</p>
+            <p className="text-primary">Total Amount</p>
             <span className="material-icons-outlined text-red">
               <IconShoppingBag />
             </span>
           </div>
-          <span className="text-primary font-weight-bold">56</span>
+          <span className="text-primary font-weight-bold">$ {' '}56876</span>
         </div>
       </div>
 

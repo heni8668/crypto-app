@@ -43,7 +43,7 @@ const Navbar = () => {
               <Link to="/market">Market</Link>
             </li>
             <li>
-              <Link to="/choose-us">Choose Us</Link>
+              <Link to="/wallet">Wallet</Link>
             </li>
             <li>
               <Link to="/trade">Trade</Link>
@@ -72,7 +72,7 @@ const Navbar = () => {
             <Link to="/market">Market</Link>
           </li>
           <li onClick={openMobile}>
-            <Link to="/choose-us">Choose Us</Link>
+            <Link to="/wallet">Wallet</Link>
           </li>
           <li>
             <Link to="/trade">Trade</Link>

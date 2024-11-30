@@ -15,7 +15,7 @@ function WhyUs() {
 
   return (
     <>
-      <section id="choose-us" className="why-section">
+      <section id="wallet" className="why-section">
         <div className="container">
           <div className="choose-container">
             <h2>

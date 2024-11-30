@@ -10,6 +10,7 @@ function Signup() {
     confirmPassword: "",
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // New loading state
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -17,25 +18,28 @@ function Signup() {
     setFormData({ ...formData, [name]: value });
   };
 
- const handleSubmit = async (e) => {
-   e.preventDefault();
-   if (formData.password !== formData.confirmPassword) {
-     alert("Passwords do not match!");
-     return;
-   }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
 
-   try {
-     const response = await axios.post(
-       "http://localhost:5000/api/auth/register",
-       formData
-     );
-     console.log("Signup Successful:", response.data);
-     navigate("/login"); // Redirect to login page after successful signup
-   } catch (error) {
-     console.error("Signup Error:", error.response.data);
-     alert("Signup failed. Please try again.");
-   }
- };
+    setIsLoading(true); // Start loading
+    try {
+      const response = await axios.post(
+        "https://crypto2-j13c.onrender.com/api/auth/register",
+        formData
+      );
+      console.log("Signup Successful:", response.data);
+      navigate("/login"); // Redirect to login page after successful signup
+    } catch (error) {
+      console.error("Signup Error:", error.response?.data || error.message);
+      alert("Signup failed. Please try again.");
+    } finally {
+      setIsLoading(false); // Stop loading
+    }
+  };
 
   return (
     <section className="signup-section" style={styles.section}>
@@ -111,10 +115,9 @@ function Signup() {
               required
               style={styles.input}
             />
-            
           </div>
-          <button type="submit" style={styles.button}>
-            Signup
+          <button type="submit" style={styles.button} disabled={isLoading}>
+            {isLoading ? "Signing up..." : "Signup"}
           </button>
         </form>
         <p style={styles.footerText}>
@@ -201,12 +204,13 @@ const styles = {
     fontSize: "1rem",
     fontWeight: "600",
     transition: "all 0.3s",
+    opacity: "isLoading" ? "0.7" : "1",
   },
   footerText: {
     marginTop: "20px",
     fontSize: "0.9rem",
     color: "#555",
-    marginBottom: "20px"
+    marginBottom: "20px",
   },
   loginLink: {
     color: "#007bff",

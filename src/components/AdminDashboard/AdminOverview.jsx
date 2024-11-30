@@ -1,14 +1,78 @@
+import { IconShoppingBag } from "@tabler/icons-react";
 import React from "react";
 
 function AdminOverview() {
   return (
-    <div className="admin-overview-container">
-      <h2>Admin Overview</h2>
-      <div className="stats">
-        <div>Total Users: 5,000</div>
-        <div>Pending Withdrawals: $20,000</div>
+    <>
+      <div className="main-title">
+        <p className="font-weight-bold">DASHBOARD</p>
       </div>
-    </div>
+
+      <div className="main-cards">
+        <div className="card">
+          <div className="card-inner">
+            <p className="text-primary">PRODUCTS</p>
+            <span className="material-icons-outlined text-blue">
+              <IconShoppingBag />
+            </span>
+          </div>
+          <span className="text-primary font-weight-bold">249</span>
+        </div>
+
+        <div className="card">
+          <div className="card-inner">
+            <p className="text-primary">PURCHASE ORDERS</p>
+            <span className="material-icons-outlined text-orange">
+              <IconShoppingBag />
+            </span>
+          </div>
+          <span className="text-primary font-weight-bold">83</span>
+        </div>
+
+        <div className="card">
+          <div className="card-inner">
+            <p className="text-primary">SALES ORDERS</p>
+            <span className="material-icons-outlined text-green">
+              <IconShoppingBag />
+            </span>
+          </div>
+          <span className="text-primary font-weight-bold">79</span>
+        </div>
+
+        <div className="card">
+          <div className="card-inner">
+            <p className="text-primary">INVENTORY ALERTS</p>
+            <span className="material-icons-outlined text-red">
+              <IconShoppingBag />
+            </span>
+          </div>
+          <span className="text-primary font-weight-bold">56</span>
+        </div>
+      </div>
+
+      {/*  */}
+      {/* <div className="charts">
+          <div className="charts-card">
+            <p className="chart-title">Top 5 Products</p>
+            <ApexCharts
+              options={barChartOptions}
+              series={barChartOptions.series}
+              type="bar"
+              height={350}
+            />
+          </div>
+
+          <div className="charts-card">
+            <p className="chart-title">Purchase and Sales Orders</p>
+            <ApexCharts
+              options={areaChartOptions}
+              series={areaChartOptions.series}
+              type="area"
+              height={350}
+            />
+          </div>
+        </div> */}
+    </>
   );
 }
 

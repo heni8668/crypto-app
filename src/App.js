@@ -11,6 +11,9 @@ import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
 import UserDashboard from './pages/UserDashboard/UserDashboard';
 import AdminDashboard from './pages/AdminDashboard/AdminDashboard';
+import UserManagement from './components/AdminDashboard/UserManagement';
+import AdminOverview from './components/AdminDashboard/AdminOverview';
+import TransactionManagement from './components/AdminDashboard/TransactionManagement';
 
 function App() {
    const location = useLocation();
@@ -27,14 +30,18 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/market" element={<MarketUpdate />} />
-        <Route path="/choose-us" element={<WhyUs />} />
+        <Route path="/wallet" element={<WhyUs />} />
         <Route path="/trade" element={<Trade />} />
         <Route path="/coin" element={<Coin />} />
         <Route path="/coin/:coinId" element={<Coin />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/user" element={<UserDashboard />} />
-        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin" element={<AdminDashboard />}>
+          <Route path='/admin' element={<AdminOverview />} />
+          <Route path="/admin/users" element={<UserManagement />} />
+          <Route path="/admin/transactions" element={<TransactionManagement />} />
+        </Route>
       </Routes>
       {!shouldHideNavbarFooter && <Footer />}
     </>

@@ -6,6 +6,7 @@ function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(""); // To handle error messages
+  const [loading, setLoading] = useState(false); // For loading state
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -15,6 +16,7 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     console.log("Login Data Submitted:", formData);
 
     // Validate if both fields are filled
@@ -23,23 +25,54 @@ function Login() {
       return;
     }
 
+    setLoading(true); // Start loading
+
     try {
+      console.log("Sending Data to API:", formData);
+
       // Send login data to the backend API
       const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
-        formData
+        "https://crypto2-j13c.onrender.com/api/auth/login",
+        formData,
+        {
+          headers: { "Content-Type": "application/json" }, // Ensure proper content type
+          timeout: 5000, // Optional timeout
+        }
       );
 
-      // Store the JWT token in localStorage
-      localStorage.setItem("token", response.data.token);
+      console.log("API Response:", response.data);
 
-      // Redirect to user dashboard or home page after successful login
-      navigate("/user"); // or redirect to home page if needed
+      // Check if the response contains the token
+      if (response.data?.token) {
+        // Store the JWT token and user info in localStorage
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("userId", response.data.user._id);
+        localStorage.setItem("email", response.data.user.email);
+
+        // Redirect to user dashboard or home page after successful login
+        navigate("/admin");
+      } else {
+        setError("Unexpected response format. Please try again later.");
+        console.error("Unexpected Response Format:", response.data);
+      }
     } catch (err) {
-      setError("Invalid credentials or server error");
-      console.error(err);
+      // Log detailed error info
+      if (err.response) {
+        console.error("Server Error:", err.response.data);
+        setError(err.response.data.message || "Internal Server Error");
+      } else if (err.request) {
+        console.error("No Response from Server:", err.request);
+        setError("Unable to reach the server. Please try again later.");
+      } else {
+        console.error("Request Setup Error:", err.message);
+        setError("An unexpected error occurred. Please try again.");
+      }
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
+
+
 
   return (
     <section className="login-section" style={styles.section}>
@@ -49,6 +82,9 @@ function Login() {
 
         {/* Error message display */}
         {error && <p style={{ color: "red", fontSize: "0.9rem" }}>{error}</p>}
+
+        {/* Loading indicator */}
+        {loading && <p style={{ color: "blue" }}>Loading...</p>}
 
         <form onSubmit={handleSubmit} style={styles.form}>
           <div style={styles.formGroup}>
@@ -90,7 +126,7 @@ function Login() {
               </button>
             </div>
           </div>
-          <button type="submit" style={styles.button}>
+          <button type="submit" style={styles.button} disabled={loading}>
             Login
           </button>
         </form>
@@ -104,6 +140,9 @@ function Login() {
     </section>
   );
 }
+
+
+
 
 const styles = {
   section: {

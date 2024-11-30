@@ -1,53 +1,91 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import {
+  IconChevronDown,
+  IconUpload,
+  IconDownload,
+  IconWallet,
+  IconHome,
+  IconHistory,
+} from "@tabler/icons-react";
+import axios from "axios";
 import Btc from "../../images/hero/bitcoin.png";
 import Eth from "../../images/hero/ethereum.png";
-import { Link } from "react-router-dom";
-import { IconChevronDown } from "@tabler/icons-react";
-import axios from "axios";
 
 function Hero() {
   const [data, setData] = useState([]);
   const [coinsLoad, setCoinsLoad] = useState(true);
+  const [totalAmount, setTotalAmount] = useState(null);
+  const [userMessage, setUserMessage] = useState("");
 
-  const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=4&page=1&sparkline=false
-  `;
+  const marketUrl = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=4&page=1&sparkline=false`;
+  const apiBaseUrl = "https://crypto-ault.onrender.com/api/auth";
 
   function numberWithCommas(x) {
+    if (x === null || x === undefined) {
+      return "0";
+    }
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchMarketData = async () => {
       try {
-        const response = await axios.get(url);
-        const jsonData = response.data; // Axios automatically parses JSON data
-        setData(jsonData);
+        const response = await axios.get(marketUrl);
+        setData(response.data);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching market data:", error);
       }
     };
 
-    fetchData();
-  }, [url]);
+    const fetchWalletTotal = async () => {
+      try {
+        const userId = localStorage.getItem("userId");
+        if (!userId) {
+          setUserMessage(
+            "Please sign up or log in to start using your wallet!"
+          );
+          return;
+        }
+        const response = await axios.get(`${apiBaseUrl}/${userId}`);
+        const userData = response.data;
+        setTotalAmount(userData.send || 0.0);
+      } catch (error) {
+        console.error("Error fetching wallet total:", error);
+        setUserMessage(
+          "Unable to fetch wallet details. Please try again later."
+        );
+      }
+    };
 
-
-  // console.log(data);
+    fetchMarketData();
+    fetchWalletTotal();
+  }, [marketUrl, apiBaseUrl]);
 
   return (
     <>
+      {/* First Section */}
       <section id="home" className="hero-section">
         <div className="container">
           <div className="hero-content">
-            <div style={{ marginTop: '100px'}} className="hero-content__text">
+            <div className="hero-content__text" style={{ marginTop: "100px" }}>
               <img className="btc-float" src={Btc} alt="floating-el" />
-              <h6>
-                Track and Trade
-                <br /> <span>Crypto currencies</span>
-              </h6>
+              {userMessage ? (
+                <h6 className="user-message">{userMessage}</h6>
+              ) : (
+                <h6>
+                  <span>Main Wallet Total:</span>
+                  <br />
+                  <span className="wallet-total">
+                    {numberWithCommas(totalAmount)}
+                    <br />$
+                  </span>
+                  <span>Crypto currencies</span>
+                </h6>
+              )}
               <img className="eth-float" src={Eth} alt="floating-el" />
             </div>
 
-            {/* mobile btn */}
             <a className="mobile-btn-hero" href="#market">
               See Prices <IconChevronDown />
             </a>
@@ -83,6 +121,98 @@ function Hero() {
           </div>
         </div>
       </section>
+
+      {/* Second Section */}
+      <section id="home" className="hero-section1">
+        <div className="container">
+          <div className="hero-actions">
+            <Link to="/wallet" className="action">
+              <IconUpload size={40} />
+              <p>Send</p>
+            </Link>
+            <Link to={''} className="action">
+              <IconDownload size={40} />
+              <p>Receive</p>
+            </Link>
+            <Link to={''} className="action">
+              <IconWallet size={40} />
+              <p>Buy</p>
+            </Link>
+            <Link to={''} className="action">
+              <IconHome size={40} />
+              <p>Sell</p>
+            </Link>
+            <Link to={''} className="action">
+              <IconHistory size={40} />
+              <p>History</p>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Styling */}
+      <style jsx>{`
+        .wallet-total {
+          font-size: 24px;
+          font-weight: bold;
+          color: #28a745;
+        }
+        .user-message {
+          font-size: 18px;
+          color: #ff5722;
+          font-weight: 500;
+          text-align: center;
+        }
+        .hero-content__text h6 {
+          font-size: 18px;
+          line-height: 1.5;
+          color: #555;
+          margin-bottom: 20px;
+        }
+        .second-section {
+          margin-top: 50px;
+        }
+        .hero-actions {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-around;
+          align-items: center;
+          gap: 20px;
+          padding: 20px;
+          /* background-color: #f8f9fa; */
+          border-radius: 8px;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .action {
+          text-align: center;
+          flex: 1 1 calc(20% - 10px);
+          min-width: 120px;
+          max-width: 180px;
+        }
+        .action p {
+          margin-top: 10px;
+          font-size: 16px;
+          font-weight: 500;
+          color: #f7fbff;
+        }
+        .action svg {
+          color: #f4f3e7;
+        }
+        @media (max-width: 768px) {
+          .hero-actions {
+            gap: 15px;
+          }
+          .action {
+            flex: 1 1 calc(50% - 10px);
+          }
+        }
+        @media (max-width: 480px) {
+          .action {
+            flex: 1 1 100%;
+            text-align: center;
+          }
+        }
+      `}</style>
     </>
   );
 }

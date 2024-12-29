@@ -1,0 +1,46 @@
+.price {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+.price .price-value {
+    padding-right: 10px;
+}
+.wallet-container {
+    padding: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.wallet-container .inner {
+    padding-left: 10px;
+}
+.wallet-container .inner-wallet {
+    padding-bottom: 10px;
+}
+.actions {
+    display: flex;
+    justify-content: space-around;
+    font-size: small;
+    /* padding-right: 15px; */
+}
+.buttons {
+    margin-right: 10px;
+}
+
+.buttons .colors {
+    color: white !important;
+}
+.buttons .icons {
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-size: small;
+    font-weight: 900;
+    color: black !important;
+    background-color: rgb(241, 238, 238);
+    border-radius: 50%;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.buttons .text {
+    text-transform: capitalize !important;
+}
